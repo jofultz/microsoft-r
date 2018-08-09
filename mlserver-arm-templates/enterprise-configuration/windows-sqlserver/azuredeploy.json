@@ -645,7 +645,7 @@
                 "provisioningState": "Succeeded",
                 "resourceGuid": "03e3e461-1d6e-44ca-a897-61b0980b9b5f",
                 "frontendIPConfigurations": [{
-                    "name": "LoadBalancerFrontEnd",
+                    "name": "[variables('webNodeLoadBalancerFrontEndName')]",
                     "etag": "W/\"df3d8d63-d708-46b7-a825-724ffcc217dc\"",
                     "properties": {
                         "provisioningState": "Succeeded",
