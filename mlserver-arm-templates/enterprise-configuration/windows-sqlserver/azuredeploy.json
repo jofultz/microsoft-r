@@ -170,9 +170,9 @@
         "appGwName": "AppGateway",
         "appGwPublicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses', variables('appGwPublicIPAddressName'))]",
         "appGwID": "[resourceId('Microsoft.Network/applicationGateways',variables('appGwName'))]",
-        "appGwSubnetName": "[concat(variables('namingInfix'),'appGwSubnet')]",
+        "appGwSubnetName": "SDS_ML_GW_SUBNET",
         "appGwSubnetPrefix": "10.0.2.0/24",
-        "appGwSubnetID": "[concat(variables('vnetID'),'/subnets/', variables('appGwSubnetName'))]",
+        "appGwSubnetID": "[concat(variables('dellVnetID'),'/subnets/', variables('appGwSubnetName'))]",
         "appGwBackendPort": 80,
         "appGwBePoolName": "AppGatewayBePool",
         "scriptsUri": "[uri(deployment().properties.templateLink.uri, '.')]"
@@ -711,7 +711,7 @@
             "location": "[resourceGroup().location]",
             "apiVersion": "[providers('Microsoft.Network','applicationGateways').apiVersions[0]]",
             "dependsOn": [
-                "[variables('vnetID')]",
+                "[variables('dellVnetID')]",
                 "[concat('Microsoft.Network/publicIPAddresses/', variables('appGwPublicIPAddressName'))]"
             ],
             "properties": {
