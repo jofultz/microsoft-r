@@ -158,7 +158,7 @@
         "beSubnetName": "SDS_ML_BE_SUBNET",
         "networkSecurityGroupName": "[concat(parameters('dnsPrefix'), 'NSG')]",
         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]",
-        "dellVnetID": "[concat('/subscriptions/34e1e5c1-8c02-4cdf-b03d-df2f6fbd19c4/resourceGroups/DELL-SVCS_EngRg01/',variables('dellVnetName'))]",
+        "dellVnetID": "[concat('/subscriptions/34e1e5c1-8c02-4cdf-b03d-df2f6fbd19c4/resourceGroups/DELL-SVCS_EngRg01/providers/Microsoft.Network/virtualNetworks/',variables('dellVnetName'))]",
         "feSubnetRef": "[concat(variables('dellVnetID'),'/subnets/', variables('feSubnetName'))]",
         "beSubnetRef": "[concat(variables('dellVnetID'),'/subnets/', variables('beSubnetName'))]",
         "publicIPAddressName": "PublicIP",
