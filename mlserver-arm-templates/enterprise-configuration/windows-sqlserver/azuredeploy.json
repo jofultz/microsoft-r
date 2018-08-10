@@ -711,7 +711,6 @@
             "location": "[resourceGroup().location]",
             "apiVersion": "[providers('Microsoft.Network','applicationGateways').apiVersions[0]]",
             "dependsOn": [
-                "[variables('dellVnetID')]",
                 "[concat('Microsoft.Network/publicIPAddresses/', variables('appGwPublicIPAddressName'))]"
             ],
             "properties": {
