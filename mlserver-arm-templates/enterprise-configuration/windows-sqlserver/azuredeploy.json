@@ -9,14 +9,6 @@
             },
             "maxLength": 61
         },
-        "loadBalancers_SDS_ILB_AZML_name": {
-            "defaultValue": "SDS_ILB_AZML",
-            "type": "string"
-        },
-        "loadBalancers_SDS_ILB_AZML_id": {
-            "defaultValue": "/subscriptions/34e1e5c1-8c02-4cdf-b03d-df2f6fbd19c4/resourceGroups/DELL-SVCS_EngRg01/providers/Microsoft.Network/virtualNetworks/DELL-SVCS_EngVnet01/subnets/SDS_MLServer_PoC",
-            "type": "String"
-        },
         "webNodeVMSku": {
             "type": "string",
             "defaultValue": "Standard_D2_v2",
@@ -639,7 +631,7 @@
                 "name": "Basic",
                 "tier": "Regional"
             },
-            "name": "[parameters('loadBalancers_SDS_ILB_AZML_name')]",
+            "name": "[variables('webNodeLoadBalancerName')]",
             "apiVersion": "[providers('Microsoft.Network','loadBalancers').apiVersions[0]]",
             "location": "southcentralus",
             "scale": null,
@@ -654,7 +646,7 @@
                         "privateIPAddress": "10.164.118.165",
                         "privateIPAllocationMethod": "Dynamic",
                         "subnet": {
-                            "id": "[parameters('loadBalancers_SDS_ILB_AZML_id')]"
+                            "id": "[variables('feSubnetRef')]"
                         }
                     }
                 }],
