@@ -172,7 +172,7 @@
         "appGwID": "[resourceId('Microsoft.Network/applicationGateways',variables('appGwName'))]",
         "appGwSubnetName": "SDS_ML_GW_SUBNET",
         "appGwSubnetPrefix": "10.0.2.0/24",
-        "appGwSubnetID": "[concat(variables('dellVnetID'),'/subnets/', variables('appGwSubnetName'))]",
+        "appGwSubnetID": "[concat(variables('dellVnetID'),'/Subnets/', variables('appGwSubnetName'))]",
         "appGwBackendPort": 80,
         "appGwBePoolName": "AppGatewayBePool",
         "scriptsUri": "[uri(deployment().properties.templateLink.uri, '.')]"
