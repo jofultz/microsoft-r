@@ -643,8 +643,8 @@
                     "etag": "W/\"df3d8d63-d708-46b7-a825-724ffcc217dc\"",
                     "properties": {
                         "provisioningState": "Succeeded",
-                        "privateIPAddress": "10.164.118.165",
-                        "privateIPAllocationMethod": "Dynamic",
+                        "privateIPAddress": "10.164.118.164",
+                        "privateIPAllocationMethod": "Static",
                         "subnet": {
                             "id": "[variables('feSubnetRef')]"
                         }
@@ -728,13 +728,24 @@
                     }
                 }],
                 "frontendIPConfigurations": [{
-                    "name": "appGwFrontendIP",
-                    "properties": {
-                        "PublicIPAddress": {
-                            "id": "[variables('appGwPublicIPAddressID')]"
+                        "name": "appGwFrontendIP",
+                        "properties": {
+                            "PublicIPAddress": {
+                                "id": "[variables('appGwPublicIPAddressID')]"
+                            }
+                        }
+                    },
+                    {
+                        "name": "az-ml-poc-gw-priv-ip",
+                        "properties": {
+                            "privateIPAddress": "10.164.118.199",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[variables('appGwSubnetID')]"
+                            }
                         }
                     }
-                }],
+                ],
                 "frontendPorts": [{
                         "name": "appGwFrontendHttpPort",
                         "properties": {
