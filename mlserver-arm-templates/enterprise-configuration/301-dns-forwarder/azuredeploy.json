@@ -133,7 +133,7 @@
                         "privateIPAllocationMethod": "Static",
                         "privateIPAddress": "10.164.118.50",
                         "subnet": {
-                            "id": "[concat(variables('vnetPath'), variables('vnetName'), '/subnets/', variables('subnet1Name'))]"
+                            "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', 'DELL-SVCS_EngVnet01'), '/subnets/', variables('subnet1Name'))]"
                         },
                         "publicIPAddress": {
                             "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('pipName'))]"
