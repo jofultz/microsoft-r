@@ -47,6 +47,7 @@
         "ubuntuOSVersion": "14.04.2-LTS",
         "asetName": "DELL-SVCS-DNS-PROXY-avail",
         "nsgName": "DELL-SVCS-DNS-PROXY-nsg",
+        "vnetPath": "/subscriptions/34e1e5c1-8c02-4cdf-b03d-df2f6fbd19c4/resourceGroups/DELL-SVCS_EngRg01/providers/Microsoft.Network/virtualNetworks/",
         "vnetName": "DELL-SVCS_EngVnet01",
         "vnetAddressPrefix": "10.164.118.0/24",
         "subNet1Name": "SDS_Primary_IAAS",
@@ -132,7 +133,7 @@
                         "privateIPAllocationMethod": "Static",
                         "privateIPAddress": "10.164.118.50",
                         "subnet": {
-                            "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('vnetName')), '/subnets/', variables('subnet1Name'))]"
+                            "id": "[concat(variables('vnetPath'), variables('vnetName'), '/subnets/', variables('subnet1Name'))]"
                         },
                         "publicIPAddress": {
                             "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('pipName'))]"
