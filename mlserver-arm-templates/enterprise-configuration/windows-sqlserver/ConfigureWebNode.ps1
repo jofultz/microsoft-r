@@ -64,6 +64,12 @@ Disable-ScheduledTask -TaskName "autostartwebnode"
 
 echo "<configuration><system.webServer><security><requestFiltering><requestLimits maxAllowedContentLength=""4294967295""/></requestFiltering></security><handlers><add name=""aspNetCore"" path=""*"" verb=""*"" modules=""AspNetCoreModule"" resourceType=""Unspecified"" /></handlers><aspNetCore requestTimeout=""01:00:00"" processPath=""C:\Program Files\Microsoft\ML Server\R_SERVER\o16n\dotnet\dotnet.exe"" arguments=""./Microsoft.MLServer.WebNode.dll"" stdoutLogEnabled=""true"" stdoutLogFile="".\logs\stdout"" forwardWindowsAuthToken=""false""><environmentVariables><environmentVariable name=""COMPlus_ReadyToRunExcludeList"" value=""System.Security.Cryptography.X509Certificates"" /></environmentVariables></aspNetCore></system.webServer></configuration>" > "C:\Program Files\Microsoft\ML Server\R_SERVER\o16n\Microsoft.MLServer.WebNode\web.config"
 
+#install updated ODBC drivers
+$odbcUpdateDownloadJob = Start-Job {Invoke-WebRequest "https://download.microsoft.com/download/D/5/E/D5EEF288-A277-45C8-855B-8E2CB7E25B96/x64/msodbcsql.msi" -OutFile "C:\WindowsAzure\msodbcsql.msi"}
+$odbcUpdateDownloadJob | Wait-Job
+Start-Process msiexec.exe "/i C:\WindowsAzure\msodbcsql.msi /quiet /passive /n /le c:\WindowsAzure\msi.log IACCEPTMSODBCSQLLICENSETERMS=YES"
+#end install updated ODBC drivers
+
 $hostingBundleDownloadJob = Start-Job {Invoke-WebRequest "https://go.microsoft.com/fwlink/?linkid=844461" -OutFile "C:\WindowsAzure\HostingBundle.exe"}
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
 $hostingBundleDownloadJob | Wait-Job
