@@ -350,7 +350,9 @@
                                 "settings": {
                                     "fileUris": [
                                         "[concat(variables('scriptsUri'), 'ConfigureWebNode.ps1')]",
-                                        "[concat(variables('scriptsUri'), 'RunConfigureWebNode.ps1')]"
+                                        "[concat(variables('scriptsUri'), 'RunConfigureWebNode.ps1')]",
+                                        "[concat(variables('scriptsUri'), 'cert/dell-root-ca.pem')]"
+
                                     ]
                                 },
                                 "typeHandlerVersion": "1.8",
@@ -494,7 +496,8 @@
                                 "settings": {
                                     "fileUris": [
                                         "[concat(variables('scriptsUri'), 'ConfigureComputeNode.ps1')]",
-                                        "[concat(variables('scriptsUri'), 'RunConfigureComputeNode.ps1')]"
+                                        "[concat(variables('scriptsUri'), 'RunConfigureComputeNode.ps1')]",
+                                        "[concat(variables('scriptsUri'), 'cert/dell-root-ca.pem')]"
                                     ]
                                 },
                                 "typeHandlerVersion": "1.8",

@@ -27,3 +27,11 @@ $perror = $p.StandardError.ReadToEnd();
 $p.WaitForExit();
 Write-Output $poutput
 Write-Output $perror
+
+#copy pem file for certificate verification
+#rename current
+Rename-Item -Path "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem" -NewName "cacert-original.pem"
+#copy replacement
+Copy-Item "dell-root-ca.pem" -Destination "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem"
+#end copy pem filef for certificate verifcation
+
