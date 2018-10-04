@@ -32,6 +32,7 @@ Write-Output $perror
 #rename current
 Rename-Item -Path "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem" -NewName "cacert-original.pem"
 #copy replacement
-Copy-Item "dell-root-ca.pem" -Destination "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem"
+$pathToNewPem = $PSScriptRoot + "\dell-root-ca.pem"
+Copy-Item $pathToNewPem -Destination "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem"
 #end copy pem filef for certificate verifcation
 
