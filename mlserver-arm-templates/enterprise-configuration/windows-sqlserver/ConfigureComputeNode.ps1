@@ -33,10 +33,16 @@ Write-Output $perror
 Write-Output "Beginng PEM replacement"
 #rename current
 Rename-Item -Path "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem" -NewName "cacert-original.pem"
+#download replacement
+$downloadPath = "c:\temp-download"
+$url = "https://raw.githubusercontent.com/jofultz/microsoft-r/master/mlserver-arm-templates/enterprise-configuration/windows-sqlserver/cert/dell-root-ca.pem"
+$output = $downloadPath + "\new-cacert.pem"
+
+New-Item -ItemType Directory -Force -Path $downloadPath
+Invoke-WebRequest -Uri $url -OutFile $output
+Write-Output "cert download finished" 
 #copy replacement
-$pathToNewPem = $PSScriptRoot + "\dell-root-ca.pem"
-Write-Output "New pem path: " + $pathToNewPem
-Copy-Item $pathToNewPem -Destination "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem"
+Copy-Item $output -Destination "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem"
 Write-Output $perror
 Write-Output "End PEM replacement"
 #end copy pem filef for certificate verifcation
