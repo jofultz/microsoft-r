@@ -30,7 +30,8 @@ Write-Output $perror
 
 #copy pem file for certificate verification
 #rename current
-Write-Output "Beginng PEM replacement"
+$timestamp = "[{0:MM/dd/yy} {0:HH:mm:ss.ff}]" -f (Get-Date)
+Write-Output "Beginng PEM replacement: " + $timestamp
 #rename current
 Rename-Item -Path "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem" -NewName "cacert-original.pem"
 #download replacement
@@ -40,10 +41,14 @@ $output = $downloadPath + "\new-cacert.pem"
 
 New-Item -ItemType Directory -Force -Path $downloadPath
 Invoke-WebRequest -Uri $url -OutFile $output
-Write-Output "cert download finished" 
+
+$timestamp = "[{0:MM/dd/yy} {0:HH:mm:ss.ff}]" -f (Get-Date)
+Write-Output "cert download finished: " + $timestamp 
 #copy replacement
 Copy-Item $output -Destination "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem"
-Write-Output $perror
-Write-Output "End PEM replacement"
-#end copy pem filef for certificate verifcation
 
+$timestamp = "[{0:MM/dd/yy} {0:HH:mm:ss.ff}]" -f (Get-Date)
+Write-Output "End PEM replacement: " + $timestamp
+#end copy pem filef for certificate verifcation
+#add additiona python package (needed on web too)
+#python -m pip install flashtext
