@@ -28,7 +28,20 @@ $p.WaitForExit();
 Write-Output $poutput
 Write-Output $perror
 
-#copy pem file for certificate verification
+#/////////////////// install additional python packages befor changing cert
+
+#add python to path
+$env:Path += ";c:\Program Files\Microsoft\ML Server\PYTHON_SERVER"
+
+#update pip
+python -m pip install --upgrade pip
+
+#install packages
+python -m pip install flashtext
+
+#/////////////////// end install python packages
+
+#/////////////////// copy pem file for certificate verification
 #rename current
 $timestamp = "[{0:MM/dd/yy} {0:HH:mm:ss.ff}]" -f (Get-Date)
 Write-Output "Beginng PEM replacement: " + $timestamp
@@ -49,6 +62,4 @@ Copy-Item $output -Destination "C:\Program Files\Microsoft\ML Server\PYTHON_SERV
 
 $timestamp = "[{0:MM/dd/yy} {0:HH:mm:ss.ff}]" -f (Get-Date)
 Write-Output "End PEM replacement: " + $timestamp
-#end copy pem filef for certificate verifcation
-#add additiona python package (needed on web too)
-#python -m pip install flashtext
+#/////////////////// end copy pem filef for certificate verifcation
