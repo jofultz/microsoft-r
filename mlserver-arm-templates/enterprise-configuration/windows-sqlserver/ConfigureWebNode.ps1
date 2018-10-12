@@ -96,3 +96,39 @@ $iisApp | Set-ItemProperty -Name "applicationPool" -Value $iisAppPoolName
 
 Pop-Location
 iisreset
+
+#/////////////////// install additional python packages befor changing cert
+
+#add python to path
+$env:Path += ";c:\Program Files\Microsoft\ML Server\PYTHON_SERVER"
+
+#update pip
+python -m pip install --upgrade pip
+
+#install packages
+python -m pip install flashtext
+
+#/////////////////// end install python packages
+
+#/////////////////// copy pem file for certificate verification
+#rename current
+$timestamp = "[{0:MM/dd/yy} {0:HH:mm:ss.ff}]" -f (Get-Date)
+Write-Output "Beginng PEM replacement: " + $timestamp
+#rename current
+Rename-Item -Path "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem" -NewName "cacert-original.pem"
+#download replacement
+$downloadPath = "c:\temp-download"
+$url = "https://raw.githubusercontent.com/jofultz/microsoft-r/master/mlserver-arm-templates/enterprise-configuration/windows-sqlserver/cert/dell-root-ca.pem"
+$output = $downloadPath + "\new-cacert.pem"
+
+New-Item -ItemType Directory -Force -Path $downloadPath
+Invoke-WebRequest -Uri $url -OutFile $output
+
+$timestamp = "[{0:MM/dd/yy} {0:HH:mm:ss.ff}]" -f (Get-Date)
+Write-Output "cert download finished: " + $timestamp 
+#copy replacement
+Copy-Item $output -Destination "C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\lib\site-packages\certifi\cacert.pem"
+
+$timestamp = "[{0:MM/dd/yy} {0:HH:mm:ss.ff}]" -f (Get-Date)
+Write-Output "End PEM replacement: " + $timestamp
+#/////////////////// end copy pem filef for certificate verifcation
