@@ -132,3 +132,15 @@ Copy-Item $output -Destination "C:\Program Files\Microsoft\ML Server\PYTHON_SERV
 $timestamp = "[{0:MM/dd/yy} {0:HH:mm:ss.ff}]" -f (Get-Date)
 Write-Output "End PEM replacement: " + $timestamp
 #/////////////////// end copy pem filef for certificate verifcation
+#////////////////// set cors settings for webnodes
+
+$orig_text = '"CORS": {\n    "Enabled": false,\n    "Origins": []\n  },'
+$new_text = '"CORS": {\n    "Enabled": true,\n    "Origins": ["sdsapps.dell.com","*.sdsapps.dell.com"]\n  },'
+
+$mlserver_pyappsettings = 'C:\Program Files\Microsoft\ML Server\PYTHON_SERVER\o16n\Microsoft.MLServer.WebNode\appsettings.json'
+(Get-Content $mlserver_pyappsettings).replace($orig_text,$new_text) | Set-Content $mlserver_pyappsettings
+
+$mlserver_rappsettings = 'C:\Program Files\Microsoft\ML Server\R_SERVER\o16n\Microsoft.MLServer.WebNode\appsettings.json'
+(Get-Content $mlserver_rappsettings).replace($orig_text,$new_text) | Set-Content $mlserver_rappsettings
+
+#////////////////// end cors settings for webnodes

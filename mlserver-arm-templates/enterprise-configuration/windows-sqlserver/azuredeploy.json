@@ -477,6 +477,7 @@
                             "name": "nic",
                             "properties": {
                                 "primary": true,
+                                "enableAcceleratedNetworking": true,
                                 "ipConfigurations": [{
                                     "name": "ipconfig",
                                     "properties": {
