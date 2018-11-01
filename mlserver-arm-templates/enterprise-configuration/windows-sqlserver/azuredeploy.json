@@ -114,7 +114,7 @@
             "metadata": {
                 "description": "Pool size at startup of ComputeNode."
             },
-            "defaultValue": 5,
+            "defaultValue": 50,
             "maxValue": 1000
         },
         "poolMaxSize": {
