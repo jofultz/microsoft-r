@@ -4,8 +4,10 @@ param (
 )
 
 $appSettingsJson = Get-Content -Encoding UTF8 -Raw "C:\Program Files\Microsoft\ML Server\R_SERVER\o16n\Microsoft.MLServer.ComputeNode\appsettings.json" | ConvertFrom-Json
-$appSettingsJson.Pool.InitialSize = [int32]::Parse($poolInitialSize)
-$appSettingsJson.Pool.MaxSize = [int32]::Parse($poolMaxSize)
+
+$appSettingsJson.Pool.InitialSize = 100 #[int32]::Parse($poolInitialSize)
+$appSettingsJson.Pool.MaxSize = 100 #[int32]::Parse($poolMaxSize)
+
 $appSettingsJson | ConvertTo-Json -Depth 100 | Set-Content -Encoding UTF8 "C:\Program Files\Microsoft\ML Server\R_SERVER\o16n\Microsoft.MLServer.ComputeNode\appsettings.json"
 
 #install updated ODBC drivers
